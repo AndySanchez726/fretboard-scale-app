@@ -3,22 +3,28 @@ var newNotes = []
 
 var offset = 3
 
-
-const sharpNotes = function () {
+// rearranges the notes based on the offset
+const offsetFunction = function () {
     for (var i = 0; i < notes.length; i++) {
         var pointer = (i + offset) % notes.length;
-        // var offsetNote = (notes[pointer]);
-        var count = newNotes.push(notes[pointer])
-        console.log(count)
+        newNotes.push(notes[pointer]);
     }  
 };
 
-
-const minor = function () {
-    const minorArray = [notes[0], notes[2], notes[3], notes[5], notes[7], notes[8], notes[10]];
+// makes the minor scale based off newNotes
+const minorScale = function () {
+    offsetFunction();
+    const minorArray = [newNotes[0], newNotes[2], newNotes[3], newNotes[5], newNotes[7], newNotes[8], newNotes[10]];
     console.log(minorArray)
 }
 
+// makes the major scale based off newNotes
+const majorScale = function () {
+    offsetFunction();
+    const majorArray = [newNotes[0], newNotes[2], newNotes[4], newNotes[5], newNotes[7], newNotes[9], newNotes[11]]
+    console.log(majorArray)
+}
 
-minor();
-sharpNotes();
+minorScale();
+majorScale();
+console.log(newNotes)
