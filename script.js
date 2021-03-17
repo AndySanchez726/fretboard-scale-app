@@ -1,13 +1,21 @@
-const notes = ['A', 'A#', 'B', 'C', 'C#', 'D','D#', 'E', 'F', 'F#', 'G', 'G#'];
+const notesSharp = ['A', 'A#', 'B', 'C', 'C#', 'D','D#', 'E', 'F', 'F#', 'G', 'G#'];
+const notesFlat = ['A', "B♭", "B", 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭']
 var newNotes = []
 
-var offset = 3
+var offsetNote = 'C'
 
 // rearranges the notes based on the offset
 const offsetFunction = function () {
-    for (var i = 0; i < notes.length; i++) {
-        var pointer = (i + offset) % notes.length;
-        newNotes.push(notes[pointer]);
+    for (var i = 0; i < notesSharp.length; i++) {
+        if (offsetNote === notesSharp[i]) {
+            console.log(offsetNote)
+            var offset = i
+        }
+    }
+
+    for (var i = 0; i < notesSharp.length; i++) {
+        var pointer = (i + offset) % notesSharp.length;
+        newNotes.push(notesSharp[pointer]);
     }  
 };
 
@@ -15,7 +23,7 @@ const offsetFunction = function () {
 const minorScale = function () {
     offsetFunction();
     const minorArray = [newNotes[0], newNotes[2], newNotes[3], newNotes[5], newNotes[7], newNotes[8], newNotes[10]];
-    console.log(minorArray)
+    // console.log(minorArray)
 }
 
 // makes the major scale based off newNotes
@@ -25,6 +33,6 @@ const majorScale = function () {
     console.log(majorArray)
 }
 
-minorScale();
+// minorScale();
 majorScale();
-console.log(newNotes)
+// console.log(newNotes)
