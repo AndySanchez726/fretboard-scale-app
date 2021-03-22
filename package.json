@@ -1,0 +1,22 @@
+{
+  "name": "fretboard-scale-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndySanchez726/fretboard-scale-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndySanchez726/fretboard-scale-app/issues"
+  },
+  "homepage": "https://github.com/AndySanchez726/fretboard-scale-app#readme",
+  "dependencies": {
+    "@tonaljs/tonal": "^4.6.0"
+  }
+}

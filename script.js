@@ -1,3 +1,6 @@
+// import { Note } from "@tonaljs/tonal";
+const { Note } = require("@tonaljs/tonal");
+
 const allNotes = ['A♭', 'A', 'A#', 'B♭', 'B', 'C', 'C#', 'D♭', 'D', 'D#', 'E♭', 'E', 'F', 'F#', 'G♭', 'G', 'G#']
 const notesSharp = ['A', 'A#', 'B', 'C', 'C#', 'D','D#', 'E', 'F', 'F#', 'G', 'G#'];
 const notesFlat = ['A', "B♭", "B", 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭']
@@ -8,6 +11,7 @@ const minorSharp = [ 'A#','B', 'C', 'D#', 'E', 'F#', 'G#']
 var selectedRoot = 'F#'
 var selectedScale = 'Major'
 
+console.log(Note.get('C4'))
 
 const findScale = function (root, scale) {
 
