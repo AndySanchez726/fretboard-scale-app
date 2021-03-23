@@ -10,8 +10,8 @@ import { Note, ScaleType, Scale } from "@tonaljs/tonal";
 // var selectedRoot = 'F#'
 // var selectedScale = 'Major'
 
-console.log(Note.get('C4'))
-console.log(Scale.get('c chromatic'))
+// console.log(Note.get('C4'))
+// console.log(Scale.get('c chromatic'))
 
 
 
