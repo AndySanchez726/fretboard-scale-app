@@ -38,8 +38,12 @@
 }
 
 .visible {
-  visibility: visible;
+  /* visibility: visible; */
+  color: red;
+  margin: 20px
 }
 .hidden {
-  visibility: hidden;
+  /* visibility: hidden; */
+  color: grey;
+  margin: 20px
 }
