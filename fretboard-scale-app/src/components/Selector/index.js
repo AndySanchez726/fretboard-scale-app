@@ -5,13 +5,26 @@ import { Scale, Note, ScaleType } from '@tonaljs/tonal'
 function Selector() {
     const allNotes = ['Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#']
     const allScaleTypes = ScaleType.names();
-    const [formState, setFormState] = useState({noteDropdown: '', scaleDropdown:'', stringNoteDropdown: '', numberOfStringsDropdown: ''})
+    const [formState, setFormState] = useState({noteDropdown: '', scaleDropdown:'', stringNoteDropdown: '', numberOfStringsDropdown: '', tuningDropdown:['']})
     const {noteDropdown, scaleDropdown} = formState
     var fretboardChroma = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     var newArray = []
     var numberOfStrings = ['4', '5', '6', '7', '8', '9']
-
-
+    var tunings = [
+        {
+            string: 6,
+            tuning: ['E', 'A', 'D', 'G', 'B', 'E'],
+            name: 'Standard',
+            instrument: 'Guitar'
+        },
+        {
+            string: 6,
+            tuning: ['B', 'Gb', 'B', 'E', 'Ab', 'Db'],
+            name: 'Drop B',
+            instrument: 'Guitar'
+        }
+    ]
+    console.log(tunings[0].name)
 
     function handleChange(e) {
         setFormState({...formState, [e.target.name]: e.target.value})
@@ -21,6 +34,14 @@ function Selector() {
         e.preventDefault()
         var stringNote = Note.chroma(formState.stringNoteDropdown)
         var fullScale = Scale.get(formState.noteDropdown + ' ' + formState.scaleDropdown)
+        var tuningArray = formState.tuningDropdown.split('')
+        var tuningChroma = []
+        console.log(tuningArray)
+        // turns selected tuning into chroma
+        for ( var i = 0; i < tuningArray.length; i++) {
+            tuningChroma.push(Note.chroma(tuningArray[i]))
+        }
+
         document.getElementById('noteSpan').textContent = formState.noteDropdown
         document.getElementById('scaleSpan').textContent = formState.scaleDropdown
         document.getElementById('fullScale').textContent = fullScale.notes
@@ -36,30 +57,39 @@ function Selector() {
             fullScaleChroma.push(Note.chroma(fullScale.notes[i]))
         }
         var noteChroma = Note.chroma(formState.noteDropdown)
-        offsetFunction(stringNote, fretboardChroma)
+        offsetFunction(tuningChroma, fretboardChroma)
         matchArrays(newArray, fullScaleChroma, formState.numberOfStringDropdown);
         
     }
 
     // hides and shows notes in the scale
     function matchArrays(base, toSearch, stringNumber) {
+        // reverses the orientation of the strings 
+        var reverseBase = base.reverse();
         var fretboardDiv = document.getElementById('fretboard')
-        for ( var j = 0; j < stringNumber; j++) {
+        // loop through strings offset arrays
+        for ( var j = 0; j < base.length; j++) {
             var  string = 'string' + j
+            console.log(string)
             string = document.createElement('div')
+            string.className = 'String'
             fretboardDiv.appendChild(string)
-            for (var i = 0; i < base.length ; i++) {
-                var matchedFrets = toSearch.includes(base[i])
+            var newStringArray = (base[j].[0])
+            console.log(newStringArray)
+            // loop through individual string offset arrays to get notes in key
+            for (var i = 0; i < newStringArray.length ; i++) {   
+                var matchedFrets = toSearch.includes(newStringArray[i])
+                console.log(toSearch)
                 if(matchedFrets) {
                     var visibleFretEl = document.createElement('span')
                     visibleFretEl.className = 'visible'
-                    var fretNode = document.createTextNode(base[i])
+                    var fretNode = document.createTextNode(newStringArray[i])
                     visibleFretEl.appendChild(fretNode)
                     string.appendChild(visibleFretEl)
                 } else {
                     var hiddenFretEl = document.createElement('span')
                     hiddenFretEl.className = 'hidden'
-                    var fretNode = document.createTextNode(base[i])
+                    var fretNode = document.createTextNode(newStringArray[i])
                     hiddenFretEl.appendChild(fretNode)
                     string.appendChild(hiddenFretEl)
                 }
@@ -68,16 +98,20 @@ function Selector() {
     }
     // rearranges the fretboard based on the offset
     const offsetFunction = function (root, array) {
-        for (var i = 0; i < array.length; i++) {
-            if (root === array[i]) {
-                var offset = i
+        var stringOffset = []
+        for (var j = 0; j < root.length; j++) {
+            var stringChromaOffset = []
+            newArray.push([stringChromaOffset])
+            for (var i = 0; i < array.length; i++) {
+                if (root[j] === array[i]) {
+                    var offset = i
+                }
             }
+            for (var i = 0; i < array.length; i++) {
+                var pointer = (i + offset) % array.length;
+                stringChromaOffset.push(array[pointer]);
+            }  
         }
-        for (var i = 0; i < array.length; i++) {
-            var pointer = (i + offset) % array.length;
-            newArray.push(array[pointer]);
-        }  
-        return newArray
     };
 
     return (
@@ -112,13 +146,11 @@ function Selector() {
                         <option name='scale' value={scale}>{scale}</option>
                     ))}
                 </select>
-                <select name='tuningDropdown'>
+                <select name='tuningDropdown' id='tuningDropdown' onChange={handleChange}>
                     <option disabled selected value> -Tunings- </option>
-                    <option disabled value=''>-- Guitar --</option>
-                    <option value='Standard'>Standard</option>
-                    <option>Drop B</option>
-                    <option disabled value=''>-- Bass --</option>
-                    <option>Bass</option>
+                    {tunings.map(tuning => (
+                        <option name={tuning.tuning}>{[tuning.tuning]}</option>
+                    ))}
                 </select>
                 <button type='submit'>Go</button>
             </form>
