@@ -1,6 +1,7 @@
 import './App.css';
-import './script.js' ; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Selector from './components/Selector';
+
 
 function App() {
   return (

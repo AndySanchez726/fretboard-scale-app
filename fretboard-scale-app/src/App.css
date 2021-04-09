@@ -40,10 +40,18 @@
 .visible {
   /* visibility: visible; */
   color: red;
-  margin: 20px;
+  /* margin: 20px; */
 }
 .hidden {
   /* visibility: hidden; */
   color: grey;
-  margin: 20px;
+  /* margin: 20px; */
+}
+
+/* #fretboard {
+  background-image: url(/Users/andysmacbook/Desktop/Dev/fretboard-scale-app/fretboard-scale-app/src/assets/images/fretboard.png);
+} */
+#fretboard {
+  /* width: 50%; */
+  /* margin: 0 auto; */
 }
