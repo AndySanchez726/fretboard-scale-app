@@ -100,7 +100,7 @@ function Selector() {
             for(var i = 0; i<12; i++) {
                 var fret = document.createElement('div')
                 fret.className = 'col'
-                fret.innerHTML = i+1
+                fret.innerHTML = i
                 frets.appendChild(fret)
             }
             fretboardDiv.appendChild(frets)
