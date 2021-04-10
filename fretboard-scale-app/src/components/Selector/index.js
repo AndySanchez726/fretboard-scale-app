@@ -71,7 +71,7 @@ function Selector() {
             // loop through notes on string match to scale chroma
             for (var i = 0; i < newStringArray.length ; i++) {   
                 var noteDiv = document.createElement('div')
-                noteDiv.className = 'col-sm-1'
+                noteDiv.className = 'col'
                 for (var p = 0; p < scaleArray.length; p++) {
                     var matchedFrets = scaleArray[p].chroma === newStringArray[i]
                     if(matchedFrets) {
@@ -155,14 +155,7 @@ function Selector() {
             <p id='fullScale'></p>
             {/* <div id='fretboard'></div> */}
             <Container id='fretboard'>
-                <Row>
-                    <Col>Note</Col>
-                    <Col>Note 2</Col>
-                </Row>
             </Container>
-            
-            <Col />
-
         </div>
     );
 }

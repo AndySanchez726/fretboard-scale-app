@@ -55,3 +55,7 @@
   /* width: 50%; */
   /* margin: 0 auto; */
 }
+
+.col {
+  border: 1px solid black;
+}
