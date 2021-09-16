@@ -10,7 +10,7 @@ handful of different tunings.
 </div>
 
 
-![screenshot](./src/assets/images/screenshot.png)
+![screenshot](./fretboard-scale-app/src/assets/images/screenshot.png)
 
 <div align=center>
     <h1>Credits</h1>
